@@ -5,7 +5,7 @@ from info import ADMINS
 from pyrogram import Client
 import logging
 from typing import Any, Optional
-from pyrogram import filters
+from pyrogram import filters, enums
 from Vars import Var
 from utils import temp
 from pyrogram.file_id import FileId
@@ -65,7 +65,7 @@ async def media_receive_handler(bot, message):
     if not replied:
         return await message.reply('Reply to a message to get a shareable link.')
     file_type = replied.media
-    if file_type not in ["audio", 'video', 'document']:
+    if file_type not in [enums.MessageMediaType.VIDEO, enums.MessageMediaType.AUDIO, enums.MessageMediaType.DOCUMENT]:
         return await message.reply("Reply to a supported media")
     banned_user = filters.create(banned_users)
     await message.delete()
